@@ -1,0 +1,4 @@
+raw_data_path: "data/raw/heart_cleveland_upload.csv"
+path_to_save: "data/processed/heart_cleveland_upload_prep.csv"
+categorical: ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
+numerical: ["age", "trestbps", "chol", "thalach", "oldpeak"]
