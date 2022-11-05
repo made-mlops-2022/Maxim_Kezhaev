@@ -6,9 +6,9 @@ import src
 
 @hydra.main(version_base=None, config_path="configs", config_name="prep_conf")
 def main(cfg: DictConfig):
-    src.clean_data(cfg.raw_data_path, cfg.clean_data_path)
-    src.add_features(cfg.clean_data_path, cfg.featured_data_path)
-    src.split_data(cfg.featured_data_path, cfg.path_to_save)
+    src.clean_data(cfg.paths.raw, cfg.paths.clean)
+    src.add_features(cfg.paths.clean, cfg.paths.featured)
+    src.split_data(cfg.paths.featured, cfg.paths.processed)
 
 
 if __name__ == "__main__":
