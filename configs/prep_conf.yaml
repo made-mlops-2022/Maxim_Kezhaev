@@ -12,6 +12,10 @@ data:
   y_train: ${paths.processed}/y_train.csv
   y_test: ${paths.processed}/y_test.csv
 
+split:
+  test_size: 0.2
+  random_state: 1
+
 values:
   categorical:
     - "sex"

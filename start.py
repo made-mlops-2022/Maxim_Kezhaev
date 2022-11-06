@@ -13,7 +13,8 @@ cs.store(name="cleveland_config", node=Cleveland)
 def main(cfg: Cleveland):
     src.clean_data(cfg.data.raw, cfg.data.clean)
     src.add_features(cfg.data.clean, cfg.data.featured)
-    src.split_data(cfg.data.featured, cfg.paths.processed)
+    src.split_data(cfg.data.featured, cfg.paths.processed,
+                   cfg.split.test_size, cfg.split.random_state)
 
 
 if __name__ == "__main__":

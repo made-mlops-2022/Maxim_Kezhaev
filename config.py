@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 @dataclass
@@ -20,6 +20,21 @@ class Data:
 
 
 @dataclass
+class Split:
+    test_size: float
+    random_state: int
+
+
+@dataclass
 class Cleveland:
     paths: Paths
     data: Data
+    split: Split
+
+
+@dataclass
+class TrainParams:
+    model_type: str
+    random_state: int
+    n_neighbors: int = field(default=2)
+
