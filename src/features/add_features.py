@@ -5,8 +5,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 def add_features(input_path: str, output_path: str):
-    df = pd.read_csv(input_path)
-    df = df.drop(columns=["Unnamed: 0"])
+    df = pd.read_csv(input_path, index_col=0)
 
     a = pd.get_dummies(df["cp"], prefix="cp", drop_first=True)
     b = pd.get_dummies(df["thal"], prefix="thal", drop_first=True)

@@ -29,3 +29,4 @@ def train_model(features: pd.DataFrame,
 
     model.fit(features, target)
     return model
+
