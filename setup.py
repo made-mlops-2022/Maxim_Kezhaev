@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
 setup(
     name="hw1",
     packages=find_packages(),
-    version="0.1.0",
+    version="1.0.3",
     description="1st homework in mlops",
     author="Makezh",
     install_requires=required,

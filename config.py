@@ -35,9 +35,16 @@ class TrainParams:
 
 
 @dataclass
+class SavePaths:
+    models: str
+    metrics: str
+
+
+@dataclass
 class Training:
     params: TrainParams
     data: Data
+    save_paths: SavePaths
 
 
 @dataclass
@@ -45,3 +52,8 @@ class Cleveland:
     paths: Paths
     data: Data
     split: Split
+
+
+@dataclass
+class Running:
+    my_run: str

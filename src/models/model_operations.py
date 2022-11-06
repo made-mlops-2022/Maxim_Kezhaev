@@ -1,4 +1,5 @@
-from typing import Union, Dict
+import pickle
+from typing import Union, Dict, NoReturn
 
 import numpy as np
 import pandas as pd
@@ -57,3 +58,15 @@ def evaluate_model(predict: np.ndarray,
         "rmse": mean_squared_error(target, predict, squared=False),
     }
     return evaluation
+
+
+def save_model(model: Models, save_path: str) -> NoReturn:
+    with open(save_path, 'wb') as file:
+        pickle.dump(model, file)
+
+
+def load_model(load_path: str) -> Models:
+    with open(load_path, 'rb') as file:
+        model = pickle.load(file)
+    return model
+
