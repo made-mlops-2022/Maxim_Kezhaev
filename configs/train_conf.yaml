@@ -5,6 +5,11 @@ data:
   y_test: data/processed/y_test.csv
 
 params:
-  model_type: KNeighborsClassifier
+  # model_type: LogisticRegression
+  # model_type: KNeighborsClassifier
+  model_type: GaussianNB
+  # model_type: DecisionTreeClassifier
+  # model_type: SVC
+  # model_type: RandomForestClassifier
   random_state: 3
   n_neighbors: 2

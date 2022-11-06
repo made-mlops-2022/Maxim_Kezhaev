@@ -1,6 +1,7 @@
 import hydra
 import pandas as pd
 from hydra.core.config_store import ConfigStore
+from sklearn.metrics import accuracy_score
 
 from config import Cleveland, Training
 
@@ -24,9 +25,12 @@ def training(cfg: Training):
     x_train = pd.read_csv(cfg.data.x_train, index_col=0)
     y_train = pd.read_csv(cfg.data.y_train, index_col=0).squeeze()
 
-    # print(type(x_train), type(y_train))
+    x_test = pd.read_csv(cfg.data.x_test, index_col=0)
+    y_test = pd.read_csv(cfg.data.y_test, index_col=0).squeeze()
+
     model = src.train_model(x_train, y_train, cfg.params)
-    print(type(model))
+    pred = src.predict_model(model, x_test)
+    print(src.evaluate_model(pred, y_test))
 
 
 if __name__ == "__main__":
