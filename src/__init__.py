@@ -1,3 +1,6 @@
-from src.data.clean_data import clean_data
-from src.data.split_data import split_data
-from src.features.add_features import add_features
+from src.data import clean_data, split_data
+from src.features import add_features
+from src.models import train_model
+
+__all__ = ['clean_data', 'split_data',
+           'add_features', 'train_model']
