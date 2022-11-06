@@ -1,7 +1,5 @@
 from dataclasses import dataclass, field
 
-import omegaconf
-
 
 @dataclass
 class Paths:
@@ -52,8 +50,4 @@ class Cleveland:
     paths: Paths
     data: Data
     split: Split
-
-
-@dataclass
-class Running:
-    my_run: str
+    run: str

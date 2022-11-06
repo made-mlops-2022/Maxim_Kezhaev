@@ -1,22 +1,17 @@
-import json
-import sys
-from typing import NoReturn
-
-import click
 import hydra
 import pandas as pd
 from hydra.core.config_store import ConfigStore
 
-from config import Cleveland, Training, Running
+from config import Cleveland, Training
 
 import src
 
 cs = ConfigStore.instance()
-cs.store(name="cleveland_config", node=Cleveland)
+cs.store(name="train_config", node=Cleveland)
 
 
 @hydra.main(version_base=None, config_path="configs", config_name="prep_conf")
-def processing(cfg: Cleveland) -> None:
+def processing(cfg: Cleveland):
     src.clean_data(cfg.data.raw, cfg.data.clean)
     src.add_features(cfg.data.clean, cfg.data.featured)
     src.split_data(cfg.data.featured, cfg.paths.processed,
@@ -33,24 +28,6 @@ def training(cfg: Training) -> None:
     src.save_model(model, file_path)
 
 
-@hydra.main(version_base=None, config_path="configs", config_name="train_conf")
-def predicting(cfg: Training) -> None:
-    x_test = pd.read_csv(cfg.data.x_test, index_col=0)
-    y_test = pd.read_csv(cfg.data.y_test, index_col=0).squeeze()
-    model_file_path = cfg.save_paths.models + cfg.params.model_type + ".sav"
-    model = src.load_model(model_file_path)
-
-    pred = src.predict_model(model, x_test)
-    metrics_file_path = cfg.save_paths.metrics + cfg.params.model_type + ".json"
-    with open(metrics_file_path, "w") as file:
-        json.dump(src.evaluate_model(pred, y_test), file)
-
-
-def main():
+if __name__ == "__main__":
     processing()
     training()
-    predicting()
-
-
-if __name__ == "__main__":
-    main()

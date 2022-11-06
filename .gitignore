@@ -93,3 +93,4 @@ target/
 .mypy_cache/
 
 outputs/
+multirun/
