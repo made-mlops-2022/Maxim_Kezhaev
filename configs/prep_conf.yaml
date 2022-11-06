@@ -1,9 +1,16 @@
 paths:
-  raw: "data/raw/heart_cleveland_upload.csv"
-  clean: "data/interim/clean_data.csv"
-  featured: "data/processed/featured_data.csv"
-  processed: "data/processed/"
-  interim: "data/interim/"
+  raw: data/raw
+  processed: data/processed
+  interim: data/interim
+
+data:
+  raw: ${paths.raw}/heart_cleveland_upload.csv
+  clean: ${paths.interim}/clean_data.csv
+  featured: ${paths.processed}/featured_data.csv
+  x_train: ${paths.processed}/X_train.csv
+  x_test: ${paths.processed}/X_test.csv
+  y_train: ${paths.processed}/y_train.csv
+  y_test: ${paths.processed}/y_test.csv
 
 values:
   categorical:

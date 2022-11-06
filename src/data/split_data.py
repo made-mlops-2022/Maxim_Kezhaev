@@ -11,7 +11,7 @@ def split_data(input_path: str, output_path: str):
 
     x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
-    x_train.to_csv(output_path + "X_train.csv")
-    x_test.to_csv(output_path + "X_test.csv")
-    y_train.to_csv(output_path + "y_train.csv")
-    y_test.to_csv(output_path + "y_test.csv")
+    x_train.to_csv(output_path + "/X_train.csv")
+    x_test.to_csv(output_path + "/X_test.csv")
+    y_train.to_csv(output_path + "/y_train.csv")
+    y_test.to_csv(output_path + "/y_test.csv")
