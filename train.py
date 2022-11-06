@@ -24,6 +24,7 @@ def training(cfg: Training) -> None:
     y_train = pd.read_csv(cfg.data.y_train, index_col=0).squeeze()
 
     model = src.train_model(x_train, y_train, cfg.params)
+
     file_path = cfg.save_paths.models + cfg.params.model_type + ".sav"
     src.save_model(model, file_path)
 

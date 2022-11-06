@@ -23,18 +23,34 @@ Models = Union[
 def train_model(features: pd.DataFrame,
                 target: pd.Series,
                 params: TrainParams) -> Models:
-    if params.model_type == "LogisticRegression":
+    if params.model_type == "LogisticRegression"\
+            or params.model_type == "LR":
+        params.model_type = "LogisticRegression"
         model = LogisticRegression()
-    elif params.model_type == "KNeighborsClassifier":
+
+    elif params.model_type == "KNeighborsClassifier"\
+            or params.model_type == "KNN":
+        params.model_type = "KNeighborsClassifier"
         model = KNeighborsClassifier(n_neighbors=params.n_neighbors)
-    elif params.model_type == "GaussianNB":
+
+    elif params.model_type == "GaussianNB"\
+            or params.model_type == "GNB":
+        params.model_type = "GaussianNB"
         model = GaussianNB()
-    elif params.model_type == "DecisionTreeClassifier":
+
+    elif params.model_type == "DecisionTreeClassifier"\
+            or params.model_type == "DT":
+        params.model_type = "DecisionTreeClassifier"
         model = DecisionTreeClassifier()
+
     elif params.model_type == "SVC":
         model = SVC()
-    elif params.model_type == "RandomForestClassifier":
+
+    elif params.model_type == "RandomForestClassifier"\
+            or params.model_type == "RF":
+        params.model_type = "RandomForestClassifier"
         model = RandomForestClassifier()
+
     else:
         raise NotImplementedError()
 

@@ -11,11 +11,22 @@ import src
 cs = ConfigStore.instance()
 cs.store(name="predict", node=Training)
 
+model_name = {"DT": "DecisionTreeClassifier",
+              "GNB": "GaussianNB",
+              "KNN": "KNeighborsClassifier",
+              "LR": "LogisticRegression",
+              "RF": "RandomForestClassifier"}
+
 
 @hydra.main(version_base=None, config_path="configs", config_name="train_conf")
 def predicting(cfg: Training) -> None:
     x_test = pd.read_csv(cfg.data.x_test, index_col=0)
     y_test = pd.read_csv(cfg.data.y_test, index_col=0).squeeze()
+
+    for name, full_name in model_name.items():
+        if cfg.params.model_type == name:
+            cfg.params.model_type = full_name
+
     model_file_path = cfg.save_paths.models + cfg.params.model_type + ".sav"
     model = src.load_model(model_file_path)
 
