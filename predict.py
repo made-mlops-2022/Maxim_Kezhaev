@@ -30,7 +30,7 @@ def predicting(cfg: Training) -> None:
         if cfg.params.model_type == name:
             cfg.params.model_type = full_name
 
-    model_file_path = cfg.save_paths.models + cfg.params.model_type + ".sav"
+    model_file_path = cfg.save_paths.models + cfg.params.model_type + ".pkl"
     logger.info(f"Load model from {model_file_path}")
     model = src.load_model(model_file_path)
 

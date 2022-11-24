@@ -32,7 +32,7 @@ def training(cfg: Training) -> None:
     model = src.train_model(x_train, y_train, cfg.params)
     log.info("Model was fitted.")
 
-    file_path = cfg.save_paths.models + cfg.params.model_type + ".sav"
+    file_path = cfg.save_paths.models + cfg.params.model_type + ".pkl"
     src.save_model(model, file_path)
     log.info(f"Model was saved in {file_path}.")
 
