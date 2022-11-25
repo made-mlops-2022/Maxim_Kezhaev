@@ -5,6 +5,7 @@ from typing import Literal
 import pandas as pd
 import uvicorn
 from fastapi import FastAPI
+from fastapi_health import health
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -38,12 +39,12 @@ def load_model():
 
 
 @app.get("/")
-def home():
+async def home():
     return {"health_check": "OK", "model_version": "GaussianNB"}
 
 
 @app.post("/predict")
-def predict(data: ClevelandData):
+async def predict(data: ClevelandData):
     data = data.dict()
     df = pd.DataFrame([data])
     pred = model.predict(df)
@@ -55,6 +56,26 @@ def predict(data: ClevelandData):
 
     return {"answer": answer}
 
+
+def load_model_check():
+    return model is not None
+
+
+async def success_handler(**kwargs):
+    return {"Model": "prepared"}
+
+
+async def fail_handler(**kwargs):
+    return {"Model": "not prepared"}
+
+
+app.add_api_route("/health",
+                  health(
+                      [load_model_check],
+                      success_handler=success_handler,
+                      failure_handler=fail_handler
+                  )
+                  )
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8080)
