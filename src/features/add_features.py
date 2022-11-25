@@ -30,7 +30,7 @@ def add_features(input_path: str, output_path: str):
     logger.info("Add Standard Scaler.")
 
     X = df[df.columns.difference(['condition'])]
-    SKB = SelectKBest(f_classif, k=15).fit(X, np.ravel(df[['condition']]))
+    SKB = SelectKBest(f_classif, k=13).fit(X, np.ravel(df[['condition']]))
     imp_vars_SKB = list(X.columns[SKB.get_support()])
     logger.info(f"Select top-columns. {imp_vars_SKB}")
 
