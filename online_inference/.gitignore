@@ -94,3 +94,5 @@ target/
 
 outputs/
 multirun/
+
+*.pkl

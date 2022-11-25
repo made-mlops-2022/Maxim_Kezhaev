@@ -30,8 +30,7 @@ class ClevelandData(BaseModel):
 
 @app.on_event('startup')
 def load_model():
-    model_path = "../models/GaussianNB.pkl"
-    # choose this because it has the best metrics
+    model_path = os.getenv("URL_MODEL")
 
     with open(model_path, 'rb') as f:
         global model
@@ -40,7 +39,7 @@ def load_model():
 
 @app.get("/")
 async def home():
-    return {"health_check": "OK", "model_version": "GaussianNB"}
+    return {"page": "home", "model_version": "GaussianNB"}
 
 
 @app.post("/predict")
