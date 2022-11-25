@@ -30,7 +30,7 @@ class ClevelandData(BaseModel):
 
 @app.on_event('startup')
 def load_model():
-    model_path = os.getenv("URL_MODEL")
+    model_path = os.getenv("MODEL_NAME")
 
     with open(model_path, 'rb') as f:
         global model

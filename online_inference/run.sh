@@ -1,11 +1,11 @@
-export URL_MODEL="GaussianNB.pkl"
+export MODEL_NAME="GaussianNB.pkl"
 
-if [[ -f $URL_MODEL ]]
+if [[ -f $MODEL_NAME ]]
 then
   echo "Model also exists"
 else
-  wget -O $URL_MODEL 'https://drive.google.com/uc?export=download&id=1PIUpjMheDYLKR4vQ2ITwR0xHg5N3e_yw'
-  echo "Model was added --" $URL_MODEL
+  wget -O $MODEL_NAME 'https://drive.google.com/uc?export=download&id=1PIUpjMheDYLKR4vQ2ITwR0xHg5N3e_yw'
+  echo "Model was added --" $MODEL_NAME
 fi
 
 
