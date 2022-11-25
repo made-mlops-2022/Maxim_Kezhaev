@@ -25,6 +25,11 @@ Quick run:
 docker run -p 8000:8000 hw2-kezhaev:1.0.0 
 ```
 
+Local run:
+```
+/bin/zsh run.sh
+```
+
 Service is running on _http://localhost:8000
 
 
