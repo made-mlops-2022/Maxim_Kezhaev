@@ -1,5 +1,5 @@
 import os
-import joblib
+import pickle
 
 import click
 import numpy as np
@@ -8,18 +8,18 @@ from sklearn.naive_bayes import GaussianNB
 
 
 @click.command("train")
-@click.option("--data_dir")
-@click.option("--model_path")
-def train(data_dir: str, model_path: str):
-    df = pd.read_csv(os.path.join(data_dir, "data.csv"), index_col=0)
-    y = np.array(df["target"])
-    X = df.drop(columns=["target"])
+@click.option("--input-dir")
+@click.option("--output-dir")
+def train(input_dir: str, output_dir: str):
+    X = pd.read_csv(os.path.join(input_dir, "data.csv"))
+    y = pd.read_csv(os.path.join(input_dir, "target.csv"))
 
     model = GaussianNB()
     model.fit(X, y)
 
-    os.makedirs(model_path, exist_ok=True)
-    joblib.dump(model, os.path.join(model_path, "model.pkl"))
+    os.makedirs(output_dir, exist_ok=True)
+    with open(os.path.join(output_dir, "model.pkl"), "wb") as f:
+        pickle.dump(model, f)
 
 
 if __name__ == "__main__":

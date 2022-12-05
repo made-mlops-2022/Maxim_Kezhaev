@@ -29,20 +29,16 @@ with dag:
 
     wait_data_sensor = FileSensor(
         task_id="wait_processed_data",
-        filepath="processed/{{ ds }}/data.csv",
-        timeout=6000,
         poke_interval=10,
         retries=100,
-        mode="poke",
+        filepath="data/raw/{{ ds }}/data.csv"
     )
 
     wait_target_sensor = FileSensor(
-        task_id="wait_for_processed_target",
-        filepath="processed/{{ ds }}/target.csv",
-        timeout=6000,
+        task_id="wait_processed_target",
         poke_interval=10,
         retries=100,
-        mode="poke",
+        filepath="data/raw/{{ ds }}/target.csv"
     )
 
     split = DockerOperator(
@@ -76,5 +72,5 @@ with dag:
         mounts=[Mount(source=HOST_DIR_PATH, target="/data", type='bind')]
     )
 
-    preprocess >> [wait_data_sensor, wait_target_sensor] >> split >> train >> validate
+    preprocess >> [wait_data_sensor, wait_target_sensor] >>split >> train >> validate
 

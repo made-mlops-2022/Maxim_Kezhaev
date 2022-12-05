@@ -9,11 +9,10 @@ import click
 @click.option("--output-dir")
 def predict(input_dir: str, output_dir):
     data = pd.read_csv(os.path.join(input_dir, "data.csv"))
-    # do real predict instead
     data["predict"] = 1
 
     os.makedirs(output_dir, exist_ok=True)
-    data.to_csv(os.path.join(output_dir, "data.csv"))
+    data.to_csv(os.path.join(output_dir, "data.csv"), index=False)
 
 
 if __name__ == '__main__':
